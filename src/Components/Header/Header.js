@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 //import styles from "./Header.module.css";
 
-const Header = styled.header`
+const Headers = styled.header`
     color: white;
     position: fixed;
     top: 0;
@@ -24,6 +24,8 @@ const Item = styled.li`
     width: 80px;
     height: 50px;
     text-align:center;
+    border-bottom: 5px solid ${props => props.current ? "#3498db" : "transparent"};
+    transition:border-bottom 0.5s ease-in-out;
 `;
 
 const SLink = styled(Link)`
@@ -33,17 +35,19 @@ const SLink = styled(Link)`
     justify-content: center;
 `;
 
-export default () => (
-    <Header>
+const Header = ({location: {pathname}}) => (
+    <Headers>
         {/* to
         using module.css
         <ul className={styles.navList}> 
         */}
         <List>
-            <Item><SLink to="/">Movies</SLink></Item>
-            <Item><SLink to="/tv">TV</SLink></Item>
-            <Item><SLink to="/search">Search</SLink></Item>
+            <Item current={pathname === "/"}><SLink to="/">Movies</SLink></Item>
+            <Item current={pathname === "/tv"}><SLink to="/tv">TV</SLink></Item>
+            <Item current={pathname === "/search"}><SLink to="/search">Search</SLink></Item>
 
         </List>
-    </Header>
+    </Headers>
 );
+
+export default withRouter(Header);
