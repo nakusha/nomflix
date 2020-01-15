@@ -17,7 +17,6 @@ export default class extends React.Component{
             ({data: { results: nowPlaying}} = await movies.getNowPlaying());
             ({data: { results: upcoming }} = await movies.getUpcoming());
             ({data: { results: popular }} = await movies.getPopular());
-            
         } catch {
             this.setState({
                 error: "error!!!"
