@@ -6,7 +6,7 @@ const DetailPresenter = ({loading, result, error}) => null
 
 DetailPresenter.propTypes = {
     loading: PropTypes.bool.isRequired,
-    result: PropTypes.array.isRequired,
+    result: PropTypes.array,
     error: PropTypes.string
 };
 
