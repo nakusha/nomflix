@@ -12,20 +12,30 @@ export default class extends React.Component{
     };
 
     
-    handleSubmit = () => {
+    handleSubmit = (event) => {
+        event.preventDefault();
         const { searchTerm } = this.state;
         if (searchTerm !== ""){
             this.searchByTerm();
         }
     }
 
+    updateTerm = (event) => {
+        const { target: {value} } = event;
+        // console.log(target.value); 타이핑값을 얻을 수 있음
+        this.setState({
+            searchTerm: value
+        })
+    }
+
     searchByTerm = async() => {
         let error, movieResults, tvResults, loading;
         const { searchTerm } = this.state;
+        this.setState({loading:true});
         try{
             ({data: { results: movieResults}} = await movies.searchMovies(searchTerm));
             ({data: { results: tvResults}} = await tv.searchTV(searchTerm));
-            loading = true
+            loading = false
         }catch{
             error = "Can't find Result";
         }finally{
@@ -41,7 +51,6 @@ export default class extends React.Component{
 
     render() {
         const {movieResults, tvResults, searchTerm, loading, error} = this.state;
-        console.log(this.state);
         return (
             <SearchPresenter
                 movieResults={movieResults}
@@ -50,6 +59,7 @@ export default class extends React.Component{
                 loading={loading}
                 error={error}
                 handleSubmit={this.handleSubmit}
+                updateTerm={this.updateTerm}
             />
         )
     }
