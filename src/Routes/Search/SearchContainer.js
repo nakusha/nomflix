@@ -7,6 +7,7 @@ export default class extends React.Component{
         movieResults: null,
         tvResults: null,
         searchTerm: "",
+        pastTerm: "",
         loading: false,
         error: null
     };
@@ -43,14 +44,14 @@ export default class extends React.Component{
                 loading,
                 error,
                 movieResults,
-                tvResults
-
+                tvResults,
+                pastTerm:searchTerm
             });
         }
     }
 
     render() {
-        const {movieResults, tvResults, searchTerm, loading, error} = this.state;
+        const {movieResults, tvResults, searchTerm, loading, error, pastTerm} = this.state;
         return (
             <SearchPresenter
                 movieResults={movieResults}
@@ -60,6 +61,7 @@ export default class extends React.Component{
                 error={error}
                 handleSubmit={this.handleSubmit}
                 updateTerm={this.updateTerm}
+                pastTerm={pastTerm}
             />
         )
     }

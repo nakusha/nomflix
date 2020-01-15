@@ -20,7 +20,7 @@ const Input = styled.input`
     width: 100%;
 `;
 
-const SearchPresenter = ({movieResults, tvResults, searchTerm, loading, error, handleSubmit, updateTerm}) => (
+const SearchPresenter = ({movieResults, tvResults, searchTerm, loading, error, handleSubmit, updateTerm, pastTerm}) => (
     <Container>
         <Form onSubmit={handleSubmit}>
             <Input placeholder="Search Movies or TV Shows..." value={searchTerm} onChange={updateTerm}/>
@@ -39,7 +39,7 @@ const SearchPresenter = ({movieResults, tvResults, searchTerm, loading, error, h
         </>}
         {error && <Message color="#e74c3c" text={error}/>}
         {tvResults && movieResults && tvResults.length === 0 && movieResults.length === 0 && 
-            <Message text={`Nothing found for: ${searchTerm}`} color="#95a5a6"/>
+            <Message text={`Nothing found for: ${pastTerm}`} color="#95a5a6"/>
         }
     </Container>
 );
@@ -51,7 +51,8 @@ SearchPresenter.propTypes = {
     loading:PropTypes.bool.isRequired,
     error:PropTypes.string,
     handleSubmit: PropTypes.func.isRequired,
-    updateTerm: PropTypes.func.isRequired
+    updateTerm: PropTypes.func.isRequired,
+    pastTerm: PropTypes.string
 };
 
 export default SearchPresenter;
