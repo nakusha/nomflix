@@ -1,10 +1,10 @@
 # Nomflix
 
 ## Screens
-- [ ] Home
-- [ ] Search
-- [ ] TV Show
-- [ ] Detail
+- [X] Home
+- [X] Search
+- [X] TV Show
+- [X] Detail
 
 # CSS
 ## module css(using only create-react-app)
@@ -17,7 +17,7 @@
 
 ## Code Challenges
 
-- [ ] IMDB Link
+- [X] IMDB Link
 - [ ] Tabs inside of Movie / Show Details (YT Videos, Production Company & Countries)
 - [ ] Collections Link
 - [ ] /collections Route

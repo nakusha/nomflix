@@ -58,15 +58,30 @@ const ItemContainer = styled.div`
 
 const Item = styled.span``;
 
+const IMDB = styled.a`
+    color:black;
+    background-color:orange;
+    padding:2px 5px;
+    border-color:black;
+    border-width:3px;
+    border-radius:3px;
+`;
+
 const Divider = styled.span`
     margin: 0 10px;
 `;
 
 const Overview = styled.p`
-    font-size:!2px;
+    font-size:12px;
     opacity:0.7;
     line-height:1.5;
     width:50%;
+`;
+
+const ExtraInfo = styled.div`
+    width:50%;
+    margin-top:20px;
+    background-color:red;
 `;
 
 const DetailPresenter = ({loading, result, error}) => (
@@ -96,10 +111,21 @@ const DetailPresenter = ({loading, result, error}) => (
                         <Item>
                             {result.genres && result.genres.map((genre, index) => index === result.genres.length - 1 ? genre.name : `${genre.name} / `)}
                         </Item>
+                        {result.imdb_id && (
+                            <>
+                                <Divider>·</Divider>
+                                <Item>
+                                    <IMDB href={`https://www.imdb.com/title/${result.imdb_id}`} target={"_blank"}>IMDB</IMDB>
+                                </Item>
+                            </>
+                        )}
                     </ItemContainer>
                     <Overview>
                         {result.overview}
                     </Overview>
+                    <ExtraInfo>
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    </ExtraInfo>
                 </Data>
             </Content>
         </Container>
