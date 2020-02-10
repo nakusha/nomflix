@@ -11,12 +11,13 @@ export default () => (
         <>
             <Header/>
             <Switch>
-                <Route path="/" exact component={Home}/>
-                {/* 여러개가 있을경우 exact 써서 구분해준다. */}
-                <Route path="/tv" exact component={TV}/>
-                <Route path="/search" component={Search}/>
-                <Route path="/movie/:id" component={Detail}/>
-                <Route path="/show/:id" component={Detail}/>
+                {/* Hash Router로 교체
+                <Route path="/" exact component={Home}/> */}
+                <Route path="https://nakusha.github.io/nomflix/" exact component={Home}/>
+                <Route path="https://nakusha.github.io/nomflix/tv" component={TV}/>
+                <Route path="https://nakusha.github.io/nomflix/search" component={Search}/>
+                <Route path="https://nakusha.github.io/nomflix/movie/:id" component={Detail}/>
+                <Route path="https://nakusha.github.io/nomflix/show/:id" component={Detail}/>
                 <Redirect from="*" to="/"/>
             </Switch>
         </>
