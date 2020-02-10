@@ -43,3 +43,5 @@ hash Router로 교체해주어야함
 ## Netlify
 GitHub로 로그인하고 
 그냥 Deploy까지 진행하면되는데 안됨 fail뜸
+  (jsconfig의 baseUrl에 .env NODE_PATH대신 설정해야함)
+"homepage":"https://stupefied-poincare-f91f7a.netlify.com/",
