@@ -1,5 +1,5 @@
 import React from "react";
-import DetailPresenter from "./DetailPresenter"
+import ProductionPresenter from "./ProductionPresenter";
 import { movies, tv } from "api";
 
 export default class extends React.Component{
@@ -27,6 +27,7 @@ export default class extends React.Component{
 
         const {isMovie } = this.state;
         const parsedId = parseInt(id);
+        
         if (isNaN(parsedId)){
             return push("/");
         }
@@ -48,16 +49,8 @@ export default class extends React.Component{
         }
         
     }
-
-    render() {
-        const {result, error, loading} = this.state;
-        
-        return (
-            <DetailPresenter
-                result={result}
-                error={error}
-                loading={loading}
-            />
-        )
+    render(){
+        const {result, loading} = this.state;
+        return(<ProductionPresenter result={result} loading={loading}/>)
     }
 }

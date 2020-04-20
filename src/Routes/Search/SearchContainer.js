@@ -23,7 +23,6 @@ export default class extends React.Component{
 
     updateTerm = (event) => {
         const { target: {value} } = event;
-        // console.log(target.value); 타이핑값을 얻을 수 있음
         this.setState({
             searchTerm: value
         })

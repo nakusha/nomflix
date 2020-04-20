@@ -1,8 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from"Components/Loader";
+import { withRouter, Link, Route } from "react-router-dom";
+import Production from "../Production";
+import Video from "../Video";
 
 const Container = styled.div`
     height:calc(100vh - 50px);
@@ -80,11 +82,29 @@ const Overview = styled.p`
 
 const ExtraInfo = styled.div`
     width:50%;
-    margin-top:20px;
-    background-color:red;
+    margin-top:30px;
 `;
 
-const DetailPresenter = ({loading, result, error}) => (
+const ListExtra = styled.ul`
+    
+`
+const ListItem = styled.li`
+    display:inline;
+    font-size:20px;
+    padding:5px 20px;
+    border:1px solid white;
+    border-bottom:none;
+    border-radius:10px 10px 0 0;
+`
+
+const DetailPresenter = withRouter(({location :{pathname}, loading, result, error}) => {
+    let isMovie = false;
+    if (pathname.includes("movie")){
+        isMovie = true;
+    }
+    console.log(result)
+
+    return(
     loading ? (
         <>
         <Helmet>
@@ -106,7 +126,7 @@ const DetailPresenter = ({loading, result, error}) => (
                     <ItemContainer>
                         <Item>{result.release_date ? result.release_date.substring(0, 4) : result.first_air_date.substring(0, 4)}</Item>
                         <Divider>·</Divider>
-                        <Item>{result.runtime ? result.runtime : result.episode_run_time[0]} min</Item>
+                        <Item>{result.runtime ? result.runtime : `${result.episode_run_time ? result.episode_run_time[0] : ""}`} min</Item>
                         <Divider>·</Divider>
                         <Item>
                             {result.genres && result.genres.map((genre, index) => index === result.genres.length - 1 ? genre.name : `${genre.name} / `)}
@@ -124,18 +144,21 @@ const DetailPresenter = ({loading, result, error}) => (
                         {result.overview}
                     </Overview>
                     <ExtraInfo>
-                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        <ListExtra>
+                            <ListItem active={pathname === `${isMovie ? `/movie/${result.id}/video` : `/show/${result.id}/video`}`}>
+                                <Link to={isMovie ? `/movie/${result.id}/video` : `/show/${result.id}/video`}>Video</Link>
+                            </ListItem>
+                            <ListItem active={pathname === `${isMovie ? `/movie/${result.id}/production` : `/show/${result.id}/production`}`}>
+                                <Link to={isMovie ? `/movie/${result.id}/production` : `/show/${result.id}/production`}>Production</Link>
+                            </ListItem>
+                        </ListExtra>
+                        <Route path={isMovie ? `/movie/:id/production` : `/show/:id/production`} component={Production}/>
+                        <Route path={isMovie ? `/movie/:id/video` : `/show/:id/video`} component={Video}/>
                     </ExtraInfo>
                 </Data>
             </Content>
         </Container>
     )
-)
-
-DetailPresenter.propTypes = {
-    loading: PropTypes.bool.isRequired,
-    result: PropTypes.array,
-    error: PropTypes.string
-};
+)});
 
 export default DetailPresenter;

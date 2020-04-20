@@ -3,13 +3,16 @@ import HomePresenter from "./HomePresenter";
 import { movies } from "api";
 
 export default class extends React.Component{
-    state = {
-        nowPlaying: null,
-        upcoming: null,
-        popular: null,
-        error: null,
-        loading: true
-    };
+    constructor (props){
+        super(props);
+        this.state = {
+            nowPlaying: null,
+            upcoming: null,
+            popular: null,
+            error: null,
+            loading: true
+        };
+    }
 
     async componentDidMount() {
         let upcoming, popular, nowPlaying, error;
@@ -18,9 +21,7 @@ export default class extends React.Component{
             ({data: { results: upcoming }} = await movies.getUpcoming());
             ({data: { results: popular }} = await movies.getPopular());
         } catch {
-            this.setState({
-                error: "error!!!"
-            });
+            error = "error!!!";
         } finally {
             this.setState({
                 loading:false,

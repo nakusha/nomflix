@@ -1,5 +1,5 @@
 import React from "react";
-import DetailPresenter from "./DetailPresenter"
+import VideoPresenter from "./VideoPresenter";
 import { movies, tv } from "api";
 
 export default class extends React.Component{
@@ -48,16 +48,8 @@ export default class extends React.Component{
         }
         
     }
-
-    render() {
-        const {result, error, loading} = this.state;
-        
-        return (
-            <DetailPresenter
-                result={result}
-                error={error}
-                loading={loading}
-            />
-        )
+    render(){
+        const {result, loading} = this.state;
+        return (<VideoPresenter result={result} loading={loading}/>)
     }
 }
