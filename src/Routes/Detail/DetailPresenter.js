@@ -145,9 +145,13 @@ const DetailPresenter = withRouter(({location :{pathname}, loading, result, erro
                     </Overview>
                     <ExtraInfo>
                         <ListExtra>
+                            {console.log(result)}
+                            {result.videos.results.length !== 0 ? 
                             <ListItem active={pathname === `${isMovie ? `/movie/${result.id}/video` : `/show/${result.id}/video`}`}>
                                 <Link to={isMovie ? `/movie/${result.id}/video` : `/show/${result.id}/video`}>Video</Link>
                             </ListItem>
+                            :""
+                            }
                             <ListItem active={pathname === `${isMovie ? `/movie/${result.id}/production` : `/show/${result.id}/production`}`}>
                                 <Link to={isMovie ? `/movie/${result.id}/production` : `/show/${result.id}/production`}>Production</Link>
                             </ListItem>
